@@ -1,0 +1,35 @@
+1. install software: make gcc-c++ mysql-devel mysql-server curl-devel GeoIP mysql++-3.1.0
+2. config the seeder
+for example the config file:
+ROLE:0
+PEERNO:2
+SORT:0
+this means it works as seeder. the PEERNO and SORT are useless when it works as seeder.
+
+another config file "peers":
+192.168.1.2:8001
+192.168.1.2:8002
+192.168.1.2:8003
+192.168.1.2:8004
+this means this seeder has 4 peers. these 4 peers will be sent to the leecher.
+
+ROLE:1
+PEERNO:2
+SORT:0
+this means it works as leecher. it will download content from 2 peers. and select these 2 peers by geo-location score.
+
+3.compile the code
+4.put the target file to the folder "send"
+5. run the seeder ./swift -f ./send/ScottKim_2008.mp4 -l 0.0.0.0:8000
+
+6. run the leecher ./swift -h 66b9644bb01eaad09269354df00172c8a924773b -t localhost:8000 -f 2.mp4
+
+-------------------------------------
+it works like this. 
+all the seeders are working.
+first leecher connected to the 192.168.1.2:8000.
+then the seeder sent the 4 peers to leecher.
+finally, the leecher will selected 2 of them to download content.
+
+
+
